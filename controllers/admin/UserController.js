@@ -89,6 +89,23 @@ const UserController = {
       ActionType: 'OK',
     })
   },
+
+  // 获取用户列表
+  getList: async (req, res) => {
+    const result = await UserService.getList();
+    res.send({
+      ActionType: 'OK',
+      data: result
+    })
+  },
+
+  // 删除用户, 需要把req.params.id 传进去
+  delList: async (req, res) => {
+    const result = await UserService.delList({ _id: req.params.id });
+    res.send({
+      ActionType: 'OK'
+    })
+  }
 }
 
 module.exports = UserController;

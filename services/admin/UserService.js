@@ -40,6 +40,15 @@ const UserService = {
       username,
       introduction,
     })
+  },
+  // 获取用户列表
+  getList: async () => {
+    // 取出所有的用户信息, 可以在find的第二个参数数组里面添加要查询的信息
+    return UserModel.find({}, ['username', 'avatar', 'role', 'introduction', 'gender']);
+  },
+  // 删除用户
+  delList: async ({ _id }) => {
+    return UserModel.deleteOne({ _id });
   }
 }
 

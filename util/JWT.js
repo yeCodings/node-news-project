@@ -19,11 +19,4 @@ const JWT = {
   }
 }
 
-// const token = JWT.generate({ name: 'yecoding' }, '10s');
-// console.log(JWT.verify(token))
-
-// setTimeout(() => {
-//   console.log(JWT.verify(token))
-// }, 11000)
-
 module.exports = JWT;

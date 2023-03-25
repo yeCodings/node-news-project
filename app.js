@@ -40,14 +40,13 @@ app.use((req, res, next) => {
   if (token) {
     // 获取当前token 
     var payload = JWT.verify(token);
-    console.log('payload ', payload, token)
+
     if (payload) {
       // 如果当前token未过期，生成一个新的token
       const newToken = JWT.generate({
         _id: payload._id,
         username: payload.username
       }, "1d")
-      console.log(' newToken', newToken);
       res.header("Authorization", newToken)
       next();
     } else {
