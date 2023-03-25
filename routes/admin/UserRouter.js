@@ -22,9 +22,14 @@ UserRouter.post("/adminapi/user/add", upload.single('file'), UserController.add)
 // 获取用户列表
 UserRouter.get('/adminapi/user/list', UserController.getList);
 
+// 编辑用户
+UserRouter.get('/adminapi/user/list/:id', UserController.getList);
+
+// 更新用户列表
+UserRouter.put('/adminapi/user/list/:id', UserController.putList);
+
 // 删除用户
 UserRouter.delete('/adminapi/user/list/:id', UserController.delList);
-
 
 
 

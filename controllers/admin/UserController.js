@@ -90,12 +90,21 @@ const UserController = {
     })
   },
 
-  // 获取用户列表
+  // 获取用户列表 & 编辑用户
   getList: async (req, res) => {
-    const result = await UserService.getList();
+    const result = await UserService.getList(req.params);
     res.send({
       ActionType: 'OK',
       data: result
+    })
+  },
+
+  // 更新用户列表
+  putList: async (req, res) => {
+    const result = await UserService.putList(req.body);
+    res.send({
+      ActionType: 'OK',
+      // data: result
     })
   },
 
@@ -105,7 +114,9 @@ const UserController = {
     res.send({
       ActionType: 'OK'
     })
-  }
+  },
+
+
 }
 
 module.exports = UserController;
