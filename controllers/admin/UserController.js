@@ -5,8 +5,9 @@ const JWT = require('../../util/JWT');
 
 
 const UserController = {
+
+  // 用户登录
   login: async (req, res) => {
-    console.log(' req', req.body)
     var result = await UserService.login(req.body);
     if (result.length === 0) {
       res.send({
@@ -36,6 +37,7 @@ const UserController = {
       })
     }
   },
+
   // 文件上传相关处理
   upload: async (req, res) => {
     const { username, gender, introduction } = req.body;
@@ -68,7 +70,25 @@ const UserController = {
             gender: Number(gender)    // 性别
           }
     })
-  }
+  },
+
+  // 添加用户
+  add: async (req, res) => {
+    const { username, gender, introduction, password, role } = req.body;
+    const avatar = req.file ? `/avatarUploads/${req.file.filename}` : '';
+    // 调用service 模块添加用户数据
+    await UserService.add({
+      avatar,
+      password,
+      username,
+      introduction,
+      role: Number(role),
+      gender: Number(gender)
+    });
+    res.send({
+      ActionType: 'OK',
+    })
+  },
 }
 
 module.exports = UserController;
