@@ -1,5 +1,6 @@
 
 
+const UserModel = require('../../models/UserModel');
 const UserService = require('../../services/admin/UserService');
 const JWT = require('../../util/JWT');
 
@@ -74,20 +75,33 @@ const UserController = {
 
   // 添加用户
   add: async (req, res) => {
-    const { username, gender, introduction, password, role } = req.body;
-    const avatar = req.file ? `/avatarUploads/${req.file.filename}` : '';
-    // 调用service 模块添加用户数据
-    await UserService.add({
-      avatar,
-      password,
-      username,
-      introduction,
-      role: Number(role),
-      gender: Number(gender)
-    });
-    res.send({
-      ActionType: 'OK',
-    })
+    try {
+      const { username, gender, introduction, password, role } = req.body;
+      const user = await UserModel.findOne({ username });
+      if (user) {
+        return res.status(400).json({
+          code: 400,
+          msg: `${username}已经注册过了，请重新输入`,
+          data: { username }
+        });
+      }
+
+      const avatar = req.file ? `/avatarUploads/${req.file.filename}` : '';
+      // 调用service 模块添加用户数据
+      await UserService.add({
+        avatar,
+        password,
+        username,
+        introduction,
+        role: Number(role),
+        gender: Number(gender)
+      });
+      res.send({
+        ActionType: 'OK',
+      })
+    } catch (error) {
+      next(error);
+    }
   },
 
   // 获取用户列表 & 编辑用户
