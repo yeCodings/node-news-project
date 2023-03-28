@@ -9,7 +9,7 @@ const NewsService = {
     })
   },
 
-  // 获取所有新闻列表 || 获取当前列表数据
+  //  获取当前列表数据 || 获取所有新闻列表
   getList: async ({ _id }) => {
     return _id ? NewsModel.find({ _id }) : NewsModel.find({})
   },

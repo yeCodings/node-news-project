@@ -25,7 +25,6 @@ const NewsController = {
     res.send({
       ActionType: 'OK',
       data: result,
-      author: result
     })
   },
   // 发布新闻
