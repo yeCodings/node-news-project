@@ -1,6 +1,7 @@
 const NewsService = require("../../services/admin/NewsService");
 
 const NewsController = {
+  // 创建新闻
   add: async (req, res) => {
     const cover = req.file ? `/newsuploads/${req.file.filename}` : ''
     const { title, content, category, isPublish } = req.body
@@ -15,6 +16,24 @@ const NewsController = {
     })
     res.send({
       ActionType: 'OK'
+    })
+  },
+  // 获取所有新闻列表
+  getList: async (req, res) => {
+    const result = await NewsService.getList()
+    res.send({
+      ActionType: 'OK',
+      data: result
+    })
+  },
+  // 发布新闻
+  publish: async (req, res) => {
+    await NewsService.publish({
+      ...req.body,
+      editTime: new Date()
+    })
+    res.send({
+      ActionType: 'OK',
     })
   }
 }
