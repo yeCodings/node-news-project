@@ -10,8 +10,8 @@ const NewsService = {
   },
 
   // 获取所有新闻列表
-  getList: async () => {
-    return NewsModel.find({})
+  getList: async ({ _id }) => {
+    return _id ? NewsModel.find({ _id }) : NewsModel.find({})
   },
 
   // 发布新闻
@@ -27,6 +27,14 @@ const NewsService = {
     return NewsModel.deleteOne({ _id })
   },
 
+  // 更新新闻
+  updateList: async ({ _id, title, cover, content, category, isPublish, editTime }) => {
+    return NewsModel.updateOne({ _id },
+      cover ?
+        { title, cover, content, category, isPublish, editTime }
+        : { title, content, category, isPublish, editTime }
+    )
+  }
 }
 
 module.exports = NewsService
