@@ -5,6 +5,7 @@ const Schema = mongoose.Schema
 // News模型 => News集合
 
 const NewsType = {
+  author: String,
   title: String,
   content: String,
   category: Number,  // 性别： 1-最新动态， 2-典型案例， 3-通知公告

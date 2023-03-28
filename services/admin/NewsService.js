@@ -3,13 +3,13 @@ const NewsModel = require("../../models/NewsModel")
 const NewsService = {
 
   // 创建新闻
-  add: async ({ title, cover, content, category, isPublish, editTime }) => {
+  add: async ({ title, cover, content, category, isPublish, editTime, author }) => {
     return NewsModel.create({
-      title, cover, content, category, isPublish, editTime
+      title, cover, content, category, isPublish, editTime, author
     })
   },
 
-  // 获取所有新闻列表
+  // 获取所有新闻列表 || 获取当前列表数据
   getList: async ({ _id }) => {
     return _id ? NewsModel.find({ _id }) : NewsModel.find({})
   },

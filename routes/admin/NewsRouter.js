@@ -9,7 +9,7 @@ const multer = require('multer');
 // 创建一个存放上传文件的文件夹public/newsUploads 
 const upload = multer({ dest: 'public/newsUploads/' })
 
-// 添加新闻 || 编辑新闻
+// 添加新闻
 NewsRouter.post("/adminapi/news/add", upload.single('file'), NewsController.add);
 
 // 获取新闻数据

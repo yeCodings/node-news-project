@@ -4,11 +4,12 @@ const NewsController = {
   // 创建新闻
   add: async (req, res) => {
     const cover = req.file ? `/newsuploads/${req.file.filename}` : ''
-    const { title, content, category, isPublish } = req.body
+    const { title, content, category, isPublish, author } = req.body
     // 调用service 添加新闻
     await NewsService.add({
       title,                        // 新闻标题
       cover,                        // 封面图片
+      author,                       // 当前作者
       content,                      // 新闻内容
       editTime: new Date(),         // 编辑时间
       category: Number(category),   // 新闻类别
@@ -23,7 +24,8 @@ const NewsController = {
     const result = await NewsService.getList({ _id: req.params.id })
     res.send({
       ActionType: 'OK',
-      data: result
+      data: result,
+      author: result
     })
   },
   // 发布新闻
