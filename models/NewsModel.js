@@ -8,7 +8,7 @@ const NewsType = {
   author: String,
   title: String,
   content: String,
-  category: Number,  // 性别： 1-最新动态， 2-典型案例， 3-通知公告
+  category: Number,  // 类别： 1-最新动态， 2-典型案例， 3-通知公告
   cover: String,     // 封面
   isPublish: Number, // 未发布，已发布
   editTime: Date,    // 编辑时间

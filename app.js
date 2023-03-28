@@ -7,8 +7,9 @@ var logger = require('morgan');
 const JWT = require('./util/JWT');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const UserRouter = require('./routes/admin/UserRouter');
-const NewsRouter = require('./routes/admin/NewsRouter');
+const UserRouter = require('./routes/admin/UserRouter');       // 用户路由
+const NewsRouter = require('./routes/admin/NewsRouter');       // 新闻路由
+const ProductRouter = require('./routes/admin/ProductRouter'); // 产品路由
 
 var app = express();
 
@@ -27,6 +28,8 @@ app.use('/users', usersRouter);
 
 // adminapi -管理后台接口
 // webapi   -企业官网接口
+
+// 用户登录JWT校验
 app.use((req, res, next) => {
   // 如果token有效，则放行 next()
   // 如果token过期了，则返回401，重新登录
@@ -59,6 +62,7 @@ app.use((req, res, next) => {
 
 app.use(UserRouter);
 app.use(NewsRouter);
+app.use(ProductRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
