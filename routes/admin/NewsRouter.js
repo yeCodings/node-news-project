@@ -18,6 +18,10 @@ NewsRouter.get("/adminapi/news/list", NewsController.getList);
 // 发布新闻
 NewsRouter.put("/adminapi/news/publish", NewsController.publish);
 
+// 删除新闻
+NewsRouter.delete("/adminapi/news/list/:id", NewsController.delList);
+
+
 
 
 

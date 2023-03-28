@@ -35,7 +35,15 @@ const NewsController = {
     res.send({
       ActionType: 'OK',
     })
+  },
+  // 删除新闻
+  delList: async (req, res) => {
+    await NewsService.delList({ _id: req.params.id });
+    res.send({
+      ActionType: 'OK',
+    })
   }
+
 }
 
 module.exports = NewsController;
